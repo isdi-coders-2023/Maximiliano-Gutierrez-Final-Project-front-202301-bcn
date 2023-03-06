@@ -21,8 +21,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --passWithNoTests",
+    "test:coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests",
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +42,22 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "husky": "^8.0.0",
+    "jwt-decode": "^3.1.2",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/setupTests.ts"
     ]
   }
 }
