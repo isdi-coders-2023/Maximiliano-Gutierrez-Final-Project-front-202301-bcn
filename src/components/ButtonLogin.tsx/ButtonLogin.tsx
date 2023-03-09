@@ -1,3 +1,5 @@
+import ButtonLoginStyled from "./ButtonLoginStyled";
+
 interface ButtonProps {
   className: string;
   action?: () => void;
@@ -11,7 +13,15 @@ const ButtonLogin = ({
   action,
   isDisabled,
 }: ButtonProps): JSX.Element => {
-  return <></>;
+  return (
+    <ButtonLoginStyled
+      onClick={action}
+      className={className}
+      disabled={isDisabled}
+    >
+      {text}
+    </ButtonLoginStyled>
+  );
 };
 
 export default ButtonLogin;

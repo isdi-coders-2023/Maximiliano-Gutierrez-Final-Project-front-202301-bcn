@@ -9,8 +9,8 @@ const GlobalStyles = createGlobalStyle`
 body {
   padding: 20px;
   background-color: #fff;
-  font-family: var(--main-font);
   min-height: 100vh;
+  font-family: ${(props) => props.theme.fonts.primary};
 }
 
 h1,h2{
@@ -32,14 +32,9 @@ button{
   font-family: inherit;
 }
 
-:root {
-  --regLogin-color-button: #7B50F3;
-  --main-color-button: #06A0B5;
-  --sigin-signup-color-text: #A0F5E1;
-  --main-font: "Verdana", sans-serif;
-  --header-font: "Century-gothic", sans-serif;
+a, :active, :visited{
+  text-decoration: none;
 }
-
 `;
 
 export default GlobalStyles;
