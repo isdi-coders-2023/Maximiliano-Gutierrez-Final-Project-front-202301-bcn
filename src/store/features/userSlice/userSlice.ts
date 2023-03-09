@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, UserState } from "./types";
+import { User, UserState } from "../../../types/types";
 
 export const initialState: UserState = {
   isLogged: false,
