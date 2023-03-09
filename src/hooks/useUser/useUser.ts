@@ -2,7 +2,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { UserCredentials, CustomTokenPayload, LoginResponse } from "./types";
 import decodeToken from "jwt-decode";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
-import { User } from "../../store/features/userSlice/types";
+import { User } from "../../types/types";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;

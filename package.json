@@ -1,5 +1,5 @@
 {
-  "name": "base-redux-toolkit",
+  "name": "techno-playlist-creator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.8",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -50,7 +51,8 @@
     "jwt-decode": "^3.1.2",
     "lint-staged": "^13.1.2",
     "msw": "^1.1.0",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "typeface-caladea": "^1.1.13"
   },
   "jest": {
     "collectCoverageFrom": [
