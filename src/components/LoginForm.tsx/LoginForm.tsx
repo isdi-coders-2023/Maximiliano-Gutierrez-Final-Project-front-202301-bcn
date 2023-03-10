@@ -41,7 +41,7 @@ const LoginForm = (): JSX.Element => {
           <input
             type="email"
             id="email"
-            placeholder="abc@email.com"
+            placeholder="Introduce your email"
             className="login-form__field"
             autoComplete="off"
             onChange={handleEmail}
