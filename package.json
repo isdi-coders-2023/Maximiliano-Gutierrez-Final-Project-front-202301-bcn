@@ -22,8 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests",
-    "test:coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
@@ -55,6 +55,7 @@
     "lint-staged": "^13.1.2",
     "msw": "^1.1.0",
     "prettier": "^2.8.4",
+    "react-toastify": "^9.1.1",
     "system-fonts": "^1.1.5",
     "typeface-caladea": "^1.1.13"
   },

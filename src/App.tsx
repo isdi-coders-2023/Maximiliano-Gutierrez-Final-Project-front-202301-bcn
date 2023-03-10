@@ -1,13 +1,9 @@
-import ButtonLogin from "./components/ButtonLogin.tsx/ButtonLogin";
+import LoginForm from "./components/LoginForm.tsx/LoginForm";
 
 const App = () => {
   return (
     <div className="App">
-      <ButtonLogin
-        className="login-button"
-        isDisabled={false}
-        text={"Sign in"}
-      />
+      <LoginForm />
     </div>
   );
 };

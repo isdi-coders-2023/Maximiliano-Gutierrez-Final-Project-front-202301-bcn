@@ -3,6 +3,7 @@ import { UserCredentials, CustomTokenPayload, LoginResponse } from "./types";
 import decodeToken from "jwt-decode";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { User } from "../../types/types";
+import { showErrorToast } from "../../modals.ts/modals";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -16,26 +17,33 @@ const useUser = (): UseUserStructure => {
   const loginEndpoint = "login/";
 
   const loginUser = async (userCredentials: UserCredentials) => {
-    const response = await fetch(`${apiUrl}${usersEndpoint}${loginEndpoint}`, {
-      method: "POST",
-      body: JSON.stringify(userCredentials),
-      headers: { "Content-Type": "application/json" },
-    });
+    try {
+      const response = await fetch(
+        `${apiUrl}${usersEndpoint}${loginEndpoint}`,
+        {
+          method: "POST",
+          body: JSON.stringify(userCredentials),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    const { token } = (await response.json()) as LoginResponse;
+      const { token } = (await response.json()) as LoginResponse;
 
-    const tokenPayload: CustomTokenPayload = decodeToken(token);
+      const tokenPayload: CustomTokenPayload = decodeToken(token);
 
-    const { id, email } = tokenPayload;
+      const { id, email } = tokenPayload;
 
-    const logUser: User = {
-      email,
-      token,
-      id,
-    };
+      const logUser: User = {
+        email,
+        token,
+        id,
+      };
 
-    dispatch(loginUserActionCreator(logUser));
-    localStorage.setItem("token", token);
+      dispatch(loginUserActionCreator(logUser));
+      localStorage.setItem("token", token);
+    } catch {
+      showErrorToast("Invalid credentials");
+    }
   };
 
   return { loginUser };

@@ -8,5 +8,7 @@ const ButtonLoginStyled = styled.button`
   color: #fff;
   font-style: italic;
   font-size: 1.25rem;
+  width: 100%;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.45);
 `;
 export default ButtonLoginStyled;
