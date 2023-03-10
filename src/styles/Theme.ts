@@ -4,6 +4,7 @@ const theme: DefaultTheme = {
   fonts: {
     primary: "Verdana",
     secondary: "Montserrat",
+    tetiary: "Saira Stencil One",
   },
   colors: {
     regLoginColorButton: "#7B50F3",

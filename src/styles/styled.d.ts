@@ -5,6 +5,7 @@ declare module "styled-components" {
     fonts: {
       primary: string;
       secondary: string;
+      tetiary: string;
     };
     colors: {
       regLoginColorButton: string;
