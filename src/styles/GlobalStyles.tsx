@@ -7,13 +7,14 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body {
+  margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #28333f;
   min-height: 100vh;
   font-family: ${(props) => props.theme.fonts.primary};
 }
 
-h1,h2{
+h1,h2, h3, h4, h5, h6{
   padding: 0;
   margin: 0;
 }
@@ -32,7 +33,10 @@ button{
   font-family: inherit;
 }
 
-a, :active, :visited{
+a,
+a:active,
+a:visited {
+  color: inherit;
   text-decoration: none;
 }
 `;
