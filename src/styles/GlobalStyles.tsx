@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 
 body {
   margin: 0 auto;
-  padding: 20px;
+  
   background-color: #28333f;
   min-height: 100vh;
   font-family: ${(props) => props.theme.fonts.primary};
@@ -17,6 +17,7 @@ body {
 h1,h2, h3, h4, h5, h6{
   padding: 0;
   margin: 0;
+  color: #fff;
 }
 
 ol, ul, li {
@@ -36,7 +37,6 @@ button{
 a,
 a:active,
 a:visited {
-  color: inherit;
   text-decoration: none;
 }
 `;
