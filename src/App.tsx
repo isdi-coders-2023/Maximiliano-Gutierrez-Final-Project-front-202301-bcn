@@ -1,9 +1,9 @@
-import LoginForm from "./components/LoginForm.tsx/LoginForm";
+import LoginPage from "./Pages/LoginPage/LoginPage";
 
 const App = () => {
   return (
     <div className="App">
-      <LoginForm />
+      <LoginPage />
     </div>
   );
 };
