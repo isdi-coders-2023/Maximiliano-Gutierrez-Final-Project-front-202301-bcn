@@ -55,6 +55,7 @@
     "lint-staged": "^13.1.2",
     "msw": "^1.1.0",
     "prettier": "^2.8.4",
+    "react-router-dom": "^6.9.0",
     "react-toastify": "^9.1.1",
     "system-fonts": "^1.1.5",
     "typeface-caladea": "^1.1.13"
