@@ -9,7 +9,7 @@ const LoginPage = () => {
           <div className="wrap-container__text text">
             <h1 className="text__title">Log In</h1>
             <h2 className="text__description">
-              Welcome back Techno Playlist Creator, it's time to create the the
+              Welcome back to Techno Playlist Creator, it's time to create the
               techno playlist you ever wanted!
             </h2>
           </div>
