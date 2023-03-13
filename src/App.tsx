@@ -1,9 +1,9 @@
-import LoginPage from "./Pages/LoginPage/LoginPage";
+import Layout from "./components/Layout/Layout";
 
 const App = () => {
   return (
     <div className="App">
-      <LoginPage />
+      <Layout />
     </div>
   );
 };

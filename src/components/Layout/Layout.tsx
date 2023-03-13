@@ -6,13 +6,16 @@ import { useAppSelector } from "../../store/hooks";
 
 const Layout = (): JSX.Element => {
   const { isLoading } = useAppSelector((state) => state.ui);
+  const { isLogged } = useAppSelector((state) => state.user);
 
   return (
     <>
-      <LayoutScreen />
-      <ToastContainer hideProgressBar />
-      {isLoading && <Loader />}
-      <Outlet />
+      {isLogged && <LayoutScreen />}
+      <main>
+        <ToastContainer hideProgressBar />
+        {isLoading && <Loader />}
+        <Outlet />
+      </main>
     </>
   );
 };
