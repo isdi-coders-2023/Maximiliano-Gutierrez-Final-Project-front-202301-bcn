@@ -9,6 +9,12 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface UserRegisterData {
+  email: string;
+  name: string;
+  password: string;
+}
+
 export interface CustomTokenPayload extends JwtPayload {
   id: string;
   email: string;
