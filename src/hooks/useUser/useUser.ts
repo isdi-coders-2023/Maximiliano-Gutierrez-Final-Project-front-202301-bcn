@@ -6,25 +6,37 @@ import {
   UserRegisterData,
 } from "./types";
 import decodeToken from "jwt-decode";
-import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
+import useToken from "../useToken/useToken";
+import {
+  loginUserActionCreator,
+  logoutUserActionCreator,
+} from "../../store/features/userSlice/userSlice";
 import { User } from "../../types/types";
 import { showErrorToast, showSuccessToast } from "../../modals.ts/modals";
+import {
+  unsetIsLoadingActionCreator,
+  setIsLoadingActionCreator,
+} from "../../store/features/uiSlice.tsx/uiSlice";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
   registerUser: (userRegisterData: UserRegisterData) => Promise<void>;
+  logoutUser: () => void;
 }
 
 const useUser = (): UseUserStructure => {
   const dispatch = useAppDispatch();
 
-  const apiUrl = process.env.REACT_APP_URL_API;
+  const { removeToken } = useToken();
+
+  const apiUrl = process.env.REACT_APP_URL_API!;
   const usersEndpoint = "users/";
   const loginEndpoint = "login/";
   const registerEndpoint = "register/";
 
   const loginUser = async (userCredentials: UserCredentials) => {
     try {
+      dispatch(setIsLoadingActionCreator());
       const response = await fetch(
         `${apiUrl}${usersEndpoint}${loginEndpoint}`,
         {
@@ -46,11 +58,18 @@ const useUser = (): UseUserStructure => {
         id,
       };
 
+      dispatch(unsetIsLoadingActionCreator());
       dispatch(loginUserActionCreator(logUser));
+
       localStorage.setItem("token", token);
     } catch {
       showErrorToast("Invalid credentials");
     }
+  };
+
+  const logoutUser = () => {
+    removeToken();
+    dispatch(logoutUserActionCreator());
   };
 
   const registerUser = async (userRegisterData: UserRegisterData) => {
@@ -67,7 +86,7 @@ const useUser = (): UseUserStructure => {
     }
   };
 
-  return { loginUser, registerUser };
+  return { loginUser, registerUser, logoutUser };
 };
 
 export default useUser;
