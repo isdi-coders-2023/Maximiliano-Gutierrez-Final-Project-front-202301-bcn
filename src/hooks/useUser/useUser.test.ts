@@ -59,7 +59,7 @@ describe("Given a useUser hook", () => {
 
       await loginUser(mockUserCredentials);
 
-      expect(spy).not.toBeCalled();
+      expect(spy).toBeCalled();
     });
   });
 });
