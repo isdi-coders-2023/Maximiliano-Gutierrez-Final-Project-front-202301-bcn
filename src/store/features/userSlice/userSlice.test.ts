@@ -1,5 +1,10 @@
 import { UserState, User } from "../../../types/types";
-import { initialState, loginUserActionCreator, userReducer } from "./userSlice";
+import {
+  initialState,
+  loginUserActionCreator,
+  logoutUserActionCreator,
+  userReducer,
+} from "./userSlice";
 
 describe("Given a user reducer", () => {
   describe("When receives an user and an action to login user", () => {
@@ -21,6 +26,16 @@ describe("Given a user reducer", () => {
       const newUserState = userReducer(initialState, loginUsearAction);
 
       expect(newUserState).toStrictEqual(expectedState);
+    });
+  });
+
+  describe("When it receives a new state and the action to log out the user", () => {
+    test("Then it should return the user with its isLogged property set to false", () => {
+      const logoutAction = logoutUserActionCreator();
+
+      const newUserState = userReducer(initialState, logoutAction);
+
+      expect(newUserState).toStrictEqual(initialState);
     });
   });
 });
