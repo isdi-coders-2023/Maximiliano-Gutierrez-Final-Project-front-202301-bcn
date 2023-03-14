@@ -11,11 +11,10 @@ const Layout = (): JSX.Element => {
   return (
     <>
       {isLogged && <LayoutScreen />}
-      <main>
-        <ToastContainer hideProgressBar />
-        {isLoading && <Loader />}
-        <Outlet />
-      </main>
+
+      <ToastContainer hideProgressBar />
+      {isLoading && <Loader />}
+      <Outlet />
     </>
   );
 };

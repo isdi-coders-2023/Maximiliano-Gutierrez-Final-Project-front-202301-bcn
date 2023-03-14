@@ -50,6 +50,7 @@ describe("Given a useUser hook", () => {
 
       expect(spy).toHaveBeenCalledWith(loginUserActionCreator(mockUserLogin));
     });
+
     test("Then it should call the showErrorToast function", async () => {
       const {
         result: {
