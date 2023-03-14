@@ -9,7 +9,7 @@ import { getComponentRouter, router } from "./routers/routes";
 import GlobalStyles from "./styles/GlobalStyles";
 import theme from "../src/styles/Theme";
 
-const renderWithProviders = (
+export const renderWithProviders = (
   ui: React.ReactElement,
   preloadedState?: PreloadedState<RootState>
 ) => {

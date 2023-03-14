@@ -68,8 +68,7 @@
       "src/**/*.tsx",
       "!src/index.tsx",
       "!src/react-app-env.d.ts",
-      "!src/setupTests.ts",
-      "!src/components/RegisterForm/*"
+      "!src/setupTests.ts"
     ]
   }
 }
