@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ element }: ProtectedRouteProps): JSX.Element => {
-  const { token } = useAppSelector((state) => state.user);
+  const token = useAppSelector((state) => state.user.token);
 
   return token ? element : <Navigate to={endpoints.login} replace={true} />;
 };
