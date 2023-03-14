@@ -1,4 +1,4 @@
-import App from "../App";
+import App from "../components/App/App";
 import endpoints from "./types";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
