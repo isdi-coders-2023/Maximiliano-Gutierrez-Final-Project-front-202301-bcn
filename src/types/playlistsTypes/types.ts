@@ -7,7 +7,7 @@ export interface Song {
 export interface Playlist {
   playlistName: string;
   playlistPhoto: string;
-  playlistBpm: number;
+  playlistBpm?: number;
   songs: Song[];
 }
 
