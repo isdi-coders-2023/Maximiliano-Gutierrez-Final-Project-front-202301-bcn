@@ -2,37 +2,41 @@ import ProtectedRoute from "./ProtectedRoute";
 import { screen } from "@testing-library/react";
 import { renderRouterWithProviders } from "../../testUtil";
 import { useAppSelector } from "../../store/hooks";
+import * as ReactRouterDom from "react-router-dom";
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  Navigate: jest.fn(),
+}));
 
 jest.mock("../../store/hooks", () => ({
   useAppSelector: jest.fn(),
 }));
 
 describe("Given a ProtectedRoute component", () => {
-  describe("When it is rendered and there is a token", () => {
-    test("Then it should show the react element received by props", () => {
+  describe("When it is rendered and a token exists", () => {
+    test("Then it should show the component that it is receiving with props", () => {
       (useAppSelector as jest.Mock).mockReturnValueOnce({
-        token: "789456123",
+        token: "nif2398g2m'uv2¡934t21",
       });
-      const element = <div>Protected route</div>;
 
-      renderRouterWithProviders(<ProtectedRoute element={element} />);
+      const component = <div>Login page</div>;
 
-      const expectedElement = screen.getByText("Protected route");
+      renderRouterWithProviders(<ProtectedRoute element={component} />);
 
-      expect(expectedElement).toBeInTheDocument();
+      const expectedComponent = screen.getByText("Login page");
+
+      expect(expectedComponent).toBeInTheDocument();
     });
   });
 
-  describe("When it is rendered with the text `testing` and user without token", () => {
-    test("Then it should show the container with text `testing`", () => {
-      const text = "testing";
-      const containerWithText = <div>{text}</div>;
+  describe("When it is rendered and a token does not exist", () => {
+    test("Then it should show the component that it is receiving with props", () => {
+      const component = <div>Login page</div>;
 
-      renderRouterWithProviders(<ProtectedRoute element={containerWithText} />);
+      renderRouterWithProviders(<ProtectedRoute element={component} />);
 
-      const expectedRenderedText = screen.queryByText(text);
-
-      expect(expectedRenderedText).not.toBeInTheDocument();
+      expect(ReactRouterDom.Navigate).toHaveBeenCalled();
     });
   });
 });
