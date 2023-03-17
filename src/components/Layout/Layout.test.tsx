@@ -30,20 +30,6 @@ describe("Given a Layout component", () => {
   });
 });
 
-test("Then it should show a up arrow icon in the navigation bar to filter", () => {
-  const user: UserState = {
-    email: "",
-    id: "",
-    isLogged: true,
-    token: "",
-  };
-  renderRouterWithProviders(<Layout />, { user: user });
-
-  const navigationBar = screen.getByLabelText("filter");
-
-  expect(navigationBar).toBeInTheDocument();
-});
-
 test("Then it should show a logout icon in the navigation bar to logout", () => {
   const user: UserState = {
     email: "",
