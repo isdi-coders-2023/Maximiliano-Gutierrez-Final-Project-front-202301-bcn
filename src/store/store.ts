@@ -5,10 +5,15 @@ import {
   PreloadedState,
   combineReducers,
 } from "@reduxjs/toolkit";
+import { playlistsReducer } from "./features/playlistsSlice.tsx/playlistsSlice";
 import { uiReducer } from "./features/uiSlice.tsx/uiSlice";
 import { userReducer } from "./features/userSlice/userSlice";
 
-const rootReducer = combineReducers({ user: userReducer, ui: uiReducer });
+const rootReducer = combineReducers({
+  user: userReducer,
+  ui: uiReducer,
+  playlist: playlistsReducer,
+});
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({

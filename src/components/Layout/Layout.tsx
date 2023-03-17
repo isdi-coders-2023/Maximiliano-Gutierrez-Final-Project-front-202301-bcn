@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
-import HomePage from "../../Pages/HomePage/HomePage";
 import Loader from "../Loader/Loader";
 import { useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import BottomNavigation from "../BottomNavigation/BottomNavigation";
 
 const Layout = (): JSX.Element => {
   const { isLoading } = useAppSelector((state) => state.ui);
@@ -21,8 +21,8 @@ const Layout = (): JSX.Element => {
     <>
       <ToastContainer hideProgressBar />
       {isLoading && <Loader />}
-      {isLogged && <HomePage />}
       <Outlet />
+      {isLogged && <BottomNavigation />}
     </>
   );
 };
