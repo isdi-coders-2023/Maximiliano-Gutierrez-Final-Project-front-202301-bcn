@@ -6,6 +6,7 @@ const playlists: PlaylistsData = [
     playlistName: "Driving",
     playlistPhoto: "adambeyer.jpg",
     playlistBpm: 0,
+    id: "",
     songs: [
       { artistName: "Adam Beyer", trackName: "Your Mind", bpmTrack: 129 },
     ],
