@@ -27,6 +27,7 @@ const CardStyled = styled.div`
 
   img {
     border-radius: 0 0px 0 20px;
+    object-fit: cover;
   }
 
   .section {
