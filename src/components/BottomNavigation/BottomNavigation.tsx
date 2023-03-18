@@ -3,7 +3,7 @@ import {
   faArrowUpShortWide,
   faHouse,
   faPlus,
-  faUser,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../store/hooks";
@@ -32,9 +32,8 @@ const BottomNavigation = (): JSX.Element => {
               aria-label="plus icon"
             />
             <FontAwesomeIcon
-              icon={faUser}
+              icon={faArrowRightFromBracket}
               className="fa-solid"
-              aria-label="logout"
             />
           </>
         ) : (

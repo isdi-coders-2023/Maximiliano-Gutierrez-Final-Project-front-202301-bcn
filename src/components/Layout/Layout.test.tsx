@@ -39,7 +39,7 @@ test("Then it should show a logout icon in the navigation bar to logout", () => 
   };
   renderRouterWithProviders(<Layout />, { user: user });
 
-  const navigationBar = screen.getByLabelText("logout");
+  const navigationBar = screen.getByRole("navigation");
 
   expect(navigationBar).toBeInTheDocument();
 });

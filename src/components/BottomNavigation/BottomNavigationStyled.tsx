@@ -37,10 +37,3 @@ const BottomNavigationStyled = styled.div`
 `;
 
 export default BottomNavigationStyled;
-
-/* 
-linear-gradient(
-      to top,
-      rgba(0, 0, 0, 100%),
-      rgba(0, 0, 0, 3.65%)
-    ); */
