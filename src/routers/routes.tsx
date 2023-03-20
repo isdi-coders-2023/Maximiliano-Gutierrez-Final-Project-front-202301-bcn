@@ -5,6 +5,7 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import UnprotectedRoute from "../components/UnprotectedRoute/UnprotectedRoute";
 import HomePage from "../Pages/HomePage/HomePage";
+import DetailPage from "../Pages/DetailPage/DetailPage";
 
 const routes: RouteObject[] = [
   {
@@ -12,6 +13,10 @@ const routes: RouteObject[] = [
     element: <App />,
     children: [
       { index: true, element: <ProtectedRoute element={<HomePage />} /> },
+      {
+        path: endpoints.details,
+        element: <ProtectedRoute element={<DetailPage />} />,
+      },
 
       {
         path: endpoints.login,
