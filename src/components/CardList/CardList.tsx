@@ -1,4 +1,4 @@
-import { PlaylistsData } from "../../types/playlistsTypes/types";
+import { type PlaylistsData } from "../../types/playlistsTypes/types";
 import Card from "../Card/Card";
 import CardListStyled from "./CardListStyled";
 

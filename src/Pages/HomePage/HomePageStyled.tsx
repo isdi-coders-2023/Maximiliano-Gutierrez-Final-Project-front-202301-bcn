@@ -17,7 +17,7 @@ const HomePageStyled = styled.div`
   .gradient-style {
     position: absolute;
     width: 100%;
-    height: 400px;
+    height: 300px;
     left: 0px;
     top: 0px;
     background: linear-gradient(

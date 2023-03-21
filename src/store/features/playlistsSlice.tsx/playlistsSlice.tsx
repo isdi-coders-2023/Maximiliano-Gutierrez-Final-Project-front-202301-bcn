@@ -1,18 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PlaylistsData } from "../../../types/playlistsTypes/types";
+import {
+  type PlaylistsState,
+  type PlaylistsData,
+  Playlist,
+} from "../../../types/playlistsTypes/types";
 
-const initialState: PlaylistsData = [];
+const playlistState: PlaylistsState = {
+  playlists: [],
+  selectedPlaylist: {
+    id: "",
+    playlistName: "",
+    playlistPhoto: "",
+    playlistBpm: 0,
+    postedBy: "",
+    songs: [],
+  },
+};
+
 const playlistsSlice = createSlice({
   name: "playlist",
-  initialState,
+  initialState: playlistState,
   reducers: {
     loadPlaylists: (
       currentPlaylistState,
       action: PayloadAction<PlaylistsData>
-    ) => [...action.payload],
+    ): PlaylistsState => ({ ...playlistState, playlists: [...action.payload] }),
+    getPlaylist: (
+      currentPlaylistState: PlaylistsState,
+      action: PayloadAction<Playlist>
+    ): PlaylistsState => ({
+      ...currentPlaylistState,
+      selectedPlaylist: action.payload,
+    }),
   },
 });
 
-export const { loadPlaylists: loadPlaylistsActionCreator } =
-  playlistsSlice.actions;
 export const playlistsReducer = playlistsSlice.reducer;
+
+export const {
+  loadPlaylists: loadPlaylistsActionCreator,
+  getPlaylist: getPlaylistActionCreator,
+} = playlistsSlice.actions;

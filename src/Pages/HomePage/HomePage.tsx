@@ -6,11 +6,14 @@ import CardList from "../../components/CardList/CardList";
 
 const HomePage = (): JSX.Element => {
   const { getPlaylist } = usePlaylists();
+
   useEffect(() => {
     getPlaylist();
   }, [getPlaylist]);
 
-  const tracksFromPlaylist = useAppSelector((state) => state.playlist);
+  const tracksFromPlaylist = useAppSelector(
+    (state) => state.playlist.playlists
+  );
 
   return (
     <HomePageStyled className="homepage">
