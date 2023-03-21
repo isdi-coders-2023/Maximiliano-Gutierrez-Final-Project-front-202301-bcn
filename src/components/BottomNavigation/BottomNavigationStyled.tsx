@@ -4,6 +4,7 @@ const BottomNavigationStyled = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
+  z-index: 10;
 
   .degradate__element {
     display: flex;
