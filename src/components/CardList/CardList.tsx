@@ -10,7 +10,9 @@ const CardList = ({ tracksFromPlaylist }: CardListProps): JSX.Element => {
   return (
     <CardListStyled>
       {tracksFromPlaylist.map((playlist) => (
-        <Card key={playlist.id} playlist={playlist} />
+        <li key={playlist.id}>
+          <Card key={playlist.id} playlist={playlist} />
+        </li>
       ))}
     </CardListStyled>
   );

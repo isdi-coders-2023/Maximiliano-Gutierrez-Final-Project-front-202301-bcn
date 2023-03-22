@@ -33,10 +33,10 @@ const DetailPage = (): JSX.Element => {
               key={selectedPlaylist.id}
             >
               #{index + 1}
-              <div className="track-artist">
+              <article className="track-artist">
                 <p> {song.artistName} </p>
                 <p className="track-name"> {song.trackName} </p>
-              </div>
+              </article>
               {song.bpmTrack} bpm
             </li>
           ))}
