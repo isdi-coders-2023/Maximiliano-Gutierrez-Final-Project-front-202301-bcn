@@ -7,8 +7,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../store/hooks";
+import useUser from "../../hooks/useUser/useUser";
 
 const BottomNavigation = (): JSX.Element => {
+  const { logoutUser } = useUser();
   const { isLogged } = useAppSelector((state) => state.user);
 
   return (
@@ -34,6 +36,7 @@ const BottomNavigation = (): JSX.Element => {
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="fa-solid"
+              onClick={logoutUser}
             />
           </>
         ) : (
