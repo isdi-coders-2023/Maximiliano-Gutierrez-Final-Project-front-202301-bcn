@@ -12,5 +12,9 @@ declare module "styled-components" {
       mainColorButton: string;
       siginSignupColor: string;
     };
+    sizes: {
+      buttonCreate: string;
+      buttonLogin: string;
+    };
   }
 }

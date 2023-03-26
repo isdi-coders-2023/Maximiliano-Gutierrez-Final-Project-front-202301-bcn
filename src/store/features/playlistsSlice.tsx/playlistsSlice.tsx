@@ -32,6 +32,15 @@ const playlistsSlice = createSlice({
       ...currentPlaylistState,
       selectedPlaylist: action.payload,
     }),
+    deletePlaylist: (
+      currentPlaylistState: PlaylistsState,
+      action: PayloadAction<string>
+    ): PlaylistsState => ({
+      ...playlistState,
+      playlists: currentPlaylistState.playlists.filter(
+        (playlist) => playlist.id !== action.payload
+      ),
+    }),
   },
 });
 
@@ -40,4 +49,5 @@ export const playlistsReducer = playlistsSlice.reducer;
 export const {
   loadPlaylists: loadPlaylistsActionCreator,
   getPlaylist: getPlaylistActionCreator,
+  deletePlaylist: deletePlaylistActionCreator,
 } = playlistsSlice.actions;

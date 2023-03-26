@@ -11,6 +11,10 @@ const theme: DefaultTheme = {
     mainColorButton: "#06A0B5",
     siginSignupColor: "#A0F5E1",
   },
+  sizes: {
+    buttonCreate: "60%",
+    buttonLogin: "100%",
+  },
 };
 
 export default theme;

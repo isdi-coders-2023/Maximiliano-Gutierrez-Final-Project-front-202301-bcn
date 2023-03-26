@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import {
   loadPlaylistsActionCreator,
   getPlaylistActionCreator,
+  deletePlaylistActionCreator,
 } from "../../store/features/playlistsSlice.tsx/playlistsSlice";
 import {
   openModalActionCreator,
@@ -17,6 +18,7 @@ import {
 const apiUrl = process.env.REACT_APP_URL_API;
 const pathPlaylists = "playlists/";
 const getPlaylistEndpoint = "/";
+const deletePlaylistEndpoint = "delete/";
 
 const usePlaylists = () => {
   const dispatch = useAppDispatch();
@@ -60,7 +62,7 @@ const usePlaylists = () => {
         });
 
         if (!response.ok) {
-          throw new Error("We couldn't retrieve events. Try again!");
+          throw new Error("We couldn't retrieve playlists. Try again!");
         }
 
         const playlist = (await response.json()) as { playlist: Playlist };
@@ -81,7 +83,51 @@ const usePlaylists = () => {
     [dispatch, token]
   );
 
-  return { getPlaylist, getPlaylistById };
+  const deletePlaylist = useCallback(
+    async (id: string) => {
+      try {
+        dispatch(setIsLoadingActionCreator());
+
+        const response = await fetch(
+          `${apiUrl}${pathPlaylists}${deletePlaylistEndpoint}${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("The playlist couldn't be deleted");
+        }
+
+        dispatch(unsetIsLoadingActionCreator());
+        dispatch(deletePlaylistActionCreator(id));
+        dispatch(
+          openModalActionCreator({
+            isError: false,
+            isSuccess: true,
+            message: "Playlist delete correctly",
+          })
+        );
+      } catch (error) {
+        dispatch(unsetIsLoadingActionCreator());
+        dispatch(
+          openModalActionCreator({
+            isSuccess: false,
+            isError: true,
+            message: "Playlist delete correctly",
+          })
+        );
+      }
+    },
+    [dispatch, token]
+  );
+
+  return { getPlaylist, getPlaylistById, deletePlaylist };
 };
 
 export default usePlaylists;
+
+// Give me a given when then test for the deletePlaylist function
