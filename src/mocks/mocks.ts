@@ -63,3 +63,40 @@ export const preloadedStateLoggedIn = {
     token: "",
   },
 };
+
+export const mockTestDeletePlaylistById1: PlaylistsData = [
+  {
+    playlistName: "Driving",
+    playlistPhoto: "adambeyer.jpg",
+    playlistBpm: 0,
+    id: "10",
+    songs: [
+      {
+        artistName: "Adam Beyer",
+        trackName: "Your Mind",
+        bpmTrack: 129,
+      },
+    ],
+  },
+];
+
+export const mockTestDeletePlaylistById2: PlaylistsData = [
+  {
+    playlistName: "Melodic Techno",
+    playlistPhoto: "LaytonGiordani.jpg",
+    playlistBpm: 0,
+    id: "11",
+    songs: [
+      {
+        artistName: "Layton Girodani",
+        trackName: "New Generation",
+        bpmTrack: 132,
+      },
+    ],
+  },
+];
+
+export const mockTestDeletePlaylistByIdList: PlaylistsData = [
+  mockTestDeletePlaylistById1[0],
+  mockTestDeletePlaylistById2[0],
+];

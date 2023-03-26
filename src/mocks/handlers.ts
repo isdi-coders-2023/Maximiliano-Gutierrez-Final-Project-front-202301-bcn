@@ -5,6 +5,7 @@ const routes = {
   users: "users/",
   login: "login/",
   playlists: "playlists/",
+  delete: "delete/",
 };
 
 const apiUrl = process.env.REACT_APP_URL_API;
@@ -30,14 +31,8 @@ export const errorHandlers = [
   ),
 ];
 
-export const successDeleteHandler = [
-  rest.delete(`${apiUrl}/delete/my-playlist`, async (req, res, ctx) => {
-    return res(ctx.status(200));
-  }),
-];
-
 export const errorDeleteHandler = [
-  rest.delete(`${apiUrl}delete/my-playlist`, async (req, res, ctx) => {
+  rest.delete(`${apiUrl}/playlists/delete/*`, async (req, res, ctx) => {
     return res(
       ctx.status(500),
       ctx.json({ error: "The playlist couldn't be deleted" })
