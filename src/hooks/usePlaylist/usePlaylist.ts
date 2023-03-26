@@ -62,7 +62,7 @@ const usePlaylists = () => {
         });
 
         if (!response.ok) {
-          throw new Error("We couldn't retrieve playlists. Try again!");
+          throw new Error("We couldn't retrieve events. Try again!");
         }
 
         const playlist = (await response.json()) as { playlist: Playlist };
@@ -117,7 +117,7 @@ const usePlaylists = () => {
           openModalActionCreator({
             isSuccess: false,
             isError: true,
-            message: "Playlist delete correctly",
+            message: "Playlist couldn't be deleted",
           })
         );
       }
@@ -129,5 +129,3 @@ const usePlaylists = () => {
 };
 
 export default usePlaylists;
-
-// Give me a given when then test for the deletePlaylist function

@@ -1,10 +1,13 @@
 import { renderHook } from "@testing-library/react";
-import { errorHandlers } from "../../mocks/handlers";
+import { errorDeleteHandler, errorHandlers } from "../../mocks/handlers";
 import { mockPlaylistsExample } from "../../mocks/mocks";
 import { server } from "../../mocks/server";
 import Wrapper from "../../mocks/Wrapper";
 import { loadPlaylistsActionCreator } from "../../store/features/playlistsSlice.tsx/playlistsSlice";
-import { unsetIsLoadingActionCreator } from "../../store/features/uiSlice.tsx/uiSlice";
+import {
+  openModalActionCreator,
+  unsetIsLoadingActionCreator,
+} from "../../store/features/uiSlice.tsx/uiSlice";
 import { store } from "../../store/store";
 import usePlaylists from "./usePlaylist";
 
@@ -44,6 +47,28 @@ describe("Given a usePlaylists custom hook", () => {
       await getPlaylist();
 
       expect(spyDispatch).toHaveBeenCalledWith(unsetIsLoadingActionCreator());
+    });
+  });
+
+  describe("When the deleteExercise function is called and the response is failed", () => {
+    test("Then it throw an error", async () => {
+      server.use(...errorDeleteHandler);
+
+      const {
+        result: {
+          current: { deletePlaylist },
+        },
+      } = renderHook(() => usePlaylists(), { wrapper: Wrapper });
+
+      await deletePlaylist("14");
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        openModalActionCreator({
+          isSuccess: false,
+          isError: true,
+          message: "Playlist couldn't be deleted",
+        })
+      );
     });
   });
 });
