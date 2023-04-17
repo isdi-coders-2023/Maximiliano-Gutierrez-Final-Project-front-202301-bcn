@@ -1,14 +1,29 @@
 import ButtonFormStyled from "./ButtonFormStyled";
 
 interface ButtonProps {
+  ariaLabel?: string;
   text: string;
   isDisabled: boolean;
   action?: () => void;
+  className?: string;
+  type?: "button" | "submit" | "reset" | undefined;
+  disabled?: boolean;
 }
 
-const ButtonForm = ({ text, isDisabled, action }: ButtonProps): JSX.Element => {
+const ButtonForm = ({
+  text,
+  isDisabled,
+  action,
+  className,
+  ariaLabel,
+}: ButtonProps): JSX.Element => {
   return (
-    <ButtonFormStyled disabled={isDisabled} onClick={action}>
+    <ButtonFormStyled
+      disabled={isDisabled}
+      onClick={action}
+      className={className}
+      aria-label={ariaLabel}
+    >
       {text}
     </ButtonFormStyled>
   );
