@@ -85,4 +85,68 @@ describe("Given a usePlaylists custom hook", () => {
       );
     });
   });
+
+  describe("When getPlaylist function is called and the response is successful", () => {
+    test("Then it should call the dispatch with loadPlaylistsActionCreator", async () => {
+      server.restoreHandlers(); // Restaurar los controladores de respuesta predeterminados
+
+      const {
+        result: {
+          current: { getPlaylist },
+        },
+      } = renderHook(() => usePlaylist(), { wrapper: Wrapper });
+
+      await getPlaylist();
+
+      expect(spyDispatch).toHaveBeenCalledWith({
+        payload: [
+          {
+            id: "10",
+            playlistBpm: 0,
+            playlistName: "Driving",
+            playlistPhoto: "adambeyer.jpg",
+            songs: [
+              {
+                artistName: "Adam Beyer",
+                bpmTrack: 129,
+                trackName: "Your Mind",
+              },
+            ],
+          },
+          {
+            id: "11",
+            playlistBpm: 0,
+            playlistName: "Melodic Techno",
+            playlistPhoto: "LaytonGiordani.jpg",
+            songs: [
+              {
+                artistName: "Layton Girodani",
+                bpmTrack: 132,
+                trackName: "New Generation",
+              },
+            ],
+          },
+        ],
+        type: "playlist/loadPlaylists",
+      });
+    });
+
+    describe("When deletePlaylist function is called and the response is successful", () => {
+      test("Then it should call the dispatch with deletePlaylistActionCreator", async () => {
+        server.restoreHandlers();
+
+        const {
+          result: {
+            current: { deletePlaylist },
+          },
+        } = renderHook(() => usePlaylist(), { wrapper: Wrapper });
+
+        await deletePlaylist("10");
+
+        expect(spyDispatch).toHaveBeenCalledWith(
+          deletePlaylistActionCreator("10")
+        );
+      });
+    });
+  });
 });
