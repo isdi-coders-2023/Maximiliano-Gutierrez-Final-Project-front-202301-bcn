@@ -58,7 +58,7 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
     <PlaylistFilterComponentStyled className="song-filter">
       <FilterByBpm
         playlists={playlists}
-        onFilteredSongs={handleFilteredSongs || handleFilteredSongs}
+        onFilteredSongs={handleFilteredSongs}
         className="song-filter__filter-by-bpm"
       />
       <section className="song-filter__result-section">
@@ -66,7 +66,7 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
         <ul className="song-filter__list">
           {filteredSongs.map((song, index) => (
             <li
-              key={index}
+              key={song.id}
               className={`song-filter__list-item ${
                 selectedSongs.includes(song)
                   ? "song-filter__list-item--selected"
