@@ -27,7 +27,7 @@ const Card = ({
 
           <img
             src={playlistPhoto}
-            alt="Layton Giordani"
+            alt="Artist in playlist"
             width={170}
             height={113}
           />

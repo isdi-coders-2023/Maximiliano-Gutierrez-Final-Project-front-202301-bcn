@@ -11,7 +11,7 @@ const BottomNavigationStyled = styled.div`
     align-items: flex-end;
     padding-bottom: 25px;
     justify-content: space-around;
-    height: 30vh;
+    height: 22vh;
     width: 100vw;
     background: linear-gradient(
       to top,

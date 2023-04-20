@@ -28,7 +28,7 @@ const mockTokenPayload: CustomTokenPayload = {
   id: "94105818510",
 };
 
-const mockedToken = "dasnvjeuthgbd984bgoñs";
+const mockedToken = "leomatioli";
 
 describe("Given a useUser hook", () => {
   describe("When invoke the loginUser function to log the user with email 'leonardofavio@aol.com' and password 'leito2000'", () => {

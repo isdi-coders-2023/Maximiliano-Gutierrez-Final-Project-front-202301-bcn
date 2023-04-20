@@ -1,11 +1,11 @@
 import HomePageStyled from "./HomePageStyled";
-import usePlaylists from "../../hooks/usePlaylist/usePlaylist";
+import usePlaylist from "../../hooks/usePlaylist/usePlaylist";
 import { useEffect } from "react";
 import { useAppSelector } from "../../store/hooks";
 import CardList from "../../components/CardList/CardList";
 
 const HomePage = (): JSX.Element => {
-  const { getPlaylist } = usePlaylists();
+  const { getPlaylist } = usePlaylist();
 
   useEffect(() => {
     getPlaylist();

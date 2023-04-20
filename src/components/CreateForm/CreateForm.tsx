@@ -2,13 +2,15 @@ import { useEffect, useState, useCallback } from "react";
 import usePlaylist from "../../hooks/usePlaylist/usePlaylist";
 import { useAppSelector } from "../../store/hooks";
 import {
-  PlaylistUpdateStructure,
+  type PlaylistUpdateStructure,
   Song,
 } from "../../types/playlistsTypes/types";
 import ButtonForm from "../ButtonForm/ButtonForm";
 import CreateFormStyled from "./CreateFormStyled";
 import decodeToken from "jwt-decode";
 import { CustomTokenPayload } from "../../hooks/useUser/types";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 interface CreateFormProps {
   editMode?: boolean;
@@ -48,13 +50,20 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
   const { createPlaylist, getPlaylist, editPlaylistById } = usePlaylist();
 
+  const navigate = useNavigate();
+
   const formDataToPlaylistUpdateStructure = (
     formData: FormData
   ): PlaylistUpdateStructure => {
+    const playlistPhotoBlob = formData.get("playlistPhoto");
+
     const playlistUpdateStructure: PlaylistUpdateStructure = {
       id: formData.get("id") as string,
       playlistName: formData.get("playlistName") as string | undefined,
-      playlistPhoto: formData.get("playlistPhoto") as string | undefined,
+      playlistPhoto:
+        playlistPhotoBlob instanceof Blob
+          ? URL.createObjectURL(playlistPhotoBlob)
+          : undefined,
       songs: JSON.parse(formData.get("songs") as string),
     };
 
@@ -106,7 +115,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
     const data = new FormData();
 
-    data.append("id", initialValues ? initialValues.id : "");
+    data.append("id", initialValues?.id || "");
     data.append("playlistName", formState.playlistName);
     if (playlistPhoto) {
       data.append("playlistPhoto", playlistPhoto);
@@ -121,8 +130,11 @@ const CreateForm: React.FC<CreateFormProps> = ({
     data.append("songs", songsJson);
 
     if (editMode) {
-      const playlistUpdateStructure = formDataToPlaylistUpdateStructure(data);
-      await editPlaylistById(initialValues!.id, playlistUpdateStructure);
+      if (initialValues !== undefined) {
+        const playlistUpdateStructure = formDataToPlaylistUpdateStructure(data);
+        await editPlaylistById(initialValues.id, playlistUpdateStructure);
+        navigate(`/`);
+      }
     } else {
       await createPlaylist(data);
     }
@@ -134,7 +146,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
     <CreateFormStyled
       onSubmit={handleSubmit}
       className="create-form"
-      encType="multipart/form"
+      encType="multipart/form-data"
     >
       <label htmlFor="playlistName" className="create-form__label">
         Playlist Name:
@@ -147,21 +159,24 @@ const CreateForm: React.FC<CreateFormProps> = ({
         onChange={handleChange}
         className="create-form__input"
       />
-      <label htmlFor="playlistPhoto" className="create-form__label">
-        Playlist Photo:
-      </label>
-      <input
-        type="file"
-        accept="image/*"
-        id="playlistPhoto"
-        name="playlistPhoto"
-        onChange={handleChangeImage}
-        className="create-form__input"
-      />
-
+      {!editMode && (
+        <>
+          <label htmlFor="playlistPhoto" className="create-form__label">
+            Playlist Photo:
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            id="playlistPhoto"
+            name="playlistPhoto"
+            onChange={handleChangeImage}
+            className="create-form__input"
+          />
+        </>
+      )}
       <section className="create-form__section-select">
         {formState.songs.map((_, index) => (
-          <div key={index} className="create-form__song">
+          <div key={uuidv4()} className="create-form__song">
             <label
               htmlFor={`song-${index}`}
               className="create-form__song-label"

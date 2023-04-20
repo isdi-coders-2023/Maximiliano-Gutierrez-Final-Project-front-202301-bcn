@@ -6,7 +6,6 @@ const HomePageStyled = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  /* padding-top: 35px; */
   padding-bottom: 200px;
   width: 100vw;
   background-image: linear-gradient(

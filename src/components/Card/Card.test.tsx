@@ -20,7 +20,7 @@ describe("Given a Card component", () => {
     renderRouterWithProviders(<Card playlist={mockPlaylistsExample[0]} />);
 
     const expectedImageCard = screen.getByRole("img", {
-      name: "Layton Giordani",
+      name: "Artist in playlist",
     });
 
     expect(expectedImageCard).toBeInTheDocument();

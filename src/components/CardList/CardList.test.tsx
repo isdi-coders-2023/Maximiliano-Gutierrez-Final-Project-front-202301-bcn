@@ -10,7 +10,7 @@ describe("Given a CardList component", () => {
         <CardList tracksFromPlaylist={mockPlaylistsExample} />
       );
 
-      const expectedImageCard = screen.getByAltText("Layton Giordani");
+      const expectedImageCard = screen.getByAltText("Artist in playlist");
 
       expect(expectedImageCard).toBeInTheDocument();
     });
