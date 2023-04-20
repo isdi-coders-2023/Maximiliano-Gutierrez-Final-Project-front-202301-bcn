@@ -6,7 +6,7 @@ interface ButtonProps {
   isDisabled: boolean;
   action?: () => void;
   className?: string;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
 

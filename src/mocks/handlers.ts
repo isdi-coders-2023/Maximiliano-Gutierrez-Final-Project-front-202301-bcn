@@ -1,41 +1,54 @@
 import { rest } from "msw";
-import { mockPlaylistsExample } from "./mocks";
+import { mockPlaylists } from "./mocks";
 
 const routes = {
   users: "users/",
   login: "login/",
   playlists: "playlists/",
   delete: "delete/",
+  create: "create/",
+  id: ":id",
 };
 
-const apiUrl = process.env.REACT_APP_URL_API;
-
 export const handlers = [
-  rest.post(`${apiUrl}${routes.users}${routes.login}`, async (req, res, ctx) =>
-    res(ctx.status(200), ctx.json({ token: "dasnvjeuthgbd984bgoñs" }))
+  rest.post(
+    `${process.env.REACT_APP_URL_API}${routes.users}${routes.login}`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json({ token: "leomatioli" }))
+  ),
+  rest.get(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json(mockPlaylists))
   ),
 
   rest.get(
-    `${process.env.REACT_APP_URL_API}${routes.playlists}`,
-    async (req, res, ctx) =>
-      res(ctx.status(200), ctx.json({ playlists: mockPlaylistsExample }))
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.users}`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json(mockPlaylists))
+  ),
+  rest.delete(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.delete}${routes.id}`,
+    (req, res, ctx) => res(ctx.status(200))
+  ),
+  rest.get(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.id}`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json(mockPlaylists))
   ),
 ];
 
 export const errorHandlers = [
   rest.get(
     `${process.env.REACT_APP_URL_API}${routes.playlists}`,
-    (req, res, ctx) => {
-      return res(ctx.status(404));
-    }
+    (req, res, ctx) => res(ctx.status(404))
   ),
-];
-
-export const errorDeleteHandler = [
-  rest.delete(`${apiUrl}/playlists/delete/*`, async (req, res, ctx) => {
-    return res(
-      ctx.status(500),
-      ctx.json({ error: "The playlist couldn't be deleted" })
-    );
-  }),
+  rest.get(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.users}`,
+    (req, res, ctx) => res(ctx.status(400))
+  ),
+  rest.delete(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.delete}${routes.id}`,
+    (req, res, ctx) => res(ctx.status(400))
+  ),
+  rest.get(
+    `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.id}`,
+    (req, res, ctx) => res(ctx.status(400))
+  ),
 ];

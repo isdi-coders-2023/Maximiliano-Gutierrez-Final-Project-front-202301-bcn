@@ -1,26 +1,32 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import usePlaylists from "../../hooks/usePlaylist/usePlaylist";
+import { useParams, useNavigate } from "react-router-dom";
+import usePlaylist from "../../hooks/usePlaylist/usePlaylist";
 import { useAppSelector } from "../../store/hooks";
 import DetailPageStyled from "./DetailPageStyled";
+import DeleteButton from "../../components/DeleteButton/DeleteButton";
 
 const DetailPage = (): JSX.Element => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const { getPlaylistById } = usePlaylists();
+  const { getPlaylistById } = usePlaylist();
 
   const selectedPlaylist = useAppSelector(
     (state) => state.playlist.selectedPlaylist
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getPlaylistById(id!);
   }, [getPlaylistById, id]);
+
+  const handleEditClick = () => {
+    navigate(`/edit/${selectedPlaylist.id}`, { state: { selectedPlaylist } });
+  };
 
   return (
     <DetailPageStyled>
       <img src={selectedPlaylist.playlistPhoto} alt="Artist in playlist" />
-
       <div className="text-wrapper">
         <h1>{selectedPlaylist.playlistName}</h1>
         <span className="sub-tracks">Tracks</span>
@@ -41,6 +47,18 @@ const DetailPage = (): JSX.Element => {
             </li>
           ))}
         </ul>
+        {selectedPlaylist.isCreatedByUser &&
+          selectedPlaylist.id !== undefined && (
+            <>
+              <DeleteButton
+                id={selectedPlaylist.id.toString()}
+                text="Delete Playlist"
+              />
+              <button className="edit-button" onClick={handleEditClick}>
+                Edit Playlist
+              </button>
+            </>
+          )}
       </div>
     </DetailPageStyled>
   );

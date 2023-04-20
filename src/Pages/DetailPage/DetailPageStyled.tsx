@@ -6,7 +6,7 @@ const DetailPageStyled = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  padding-bottom: 300px;
+  padding-bottom: 700px;
 
   h1 {
     text-align: center;
@@ -81,6 +81,16 @@ const DetailPageStyled = styled.div`
   .track-artist {
     width: 200px;
     padding-left: 30px;
+  }
+
+  .edit-button {
+    margin-top: 20px;
+    color: #e2cfcf;
+    border: 1px solid #f49595;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #141313d1;
   }
 `;
 

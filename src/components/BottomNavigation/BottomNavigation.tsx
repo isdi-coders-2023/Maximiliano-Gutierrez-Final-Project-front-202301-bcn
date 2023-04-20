@@ -1,4 +1,5 @@
 import BottomNavigationStyled from "./BottomNavigationStyled";
+import { NavLink } from "react-router-dom";
 import {
   faArrowUpShortWide,
   faHouse,
@@ -18,21 +19,27 @@ const BottomNavigation = (): JSX.Element => {
       <nav className="degradate__element">
         {isLogged ? (
           <>
-            <FontAwesomeIcon
-              icon={faHouse}
-              className="fa-solid"
-              aria-label="home"
-            />
-            <FontAwesomeIcon
-              icon={faArrowUpShortWide}
-              className="fa-solid"
-              aria-label="filter"
-            />
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="fa-solid"
-              aria-label="plus icon"
-            />
+            <NavLink to="/">
+              <FontAwesomeIcon
+                icon={faHouse}
+                className="fa-solid"
+                aria-label="home"
+              />
+            </NavLink>
+            <NavLink to="/filter">
+              <FontAwesomeIcon
+                icon={faArrowUpShortWide}
+                className="fa-solid"
+                aria-label="filter"
+              />
+            </NavLink>
+            <NavLink to="/create">
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="fa-solid"
+                aria-label="plus icon"
+              />
+            </NavLink>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="fa-solid"

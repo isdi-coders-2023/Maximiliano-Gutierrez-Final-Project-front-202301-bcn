@@ -7,11 +7,13 @@ jest.mock("../../hooks/usePlaylist/usePlaylist");
 
 describe("Given a component CreateForm", () => {
   const createPlaylistMock = jest.fn();
+  const editPlaylistByIdMock = jest.fn();
   const getPlaylistMock = jest.fn();
 
   beforeEach(() => {
     (usePlaylists as jest.Mock).mockReturnValue({
       createPlaylist: createPlaylistMock,
+      editPlaylistById: editPlaylistByIdMock,
       getPlaylist: getPlaylistMock,
     });
   });
@@ -19,6 +21,7 @@ describe("Given a component CreateForm", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
   describe("When it is rendered", () => {
     test("Then it should show a label with the text 'Playlist Name:'", () => {
       renderRouterWithProviders(<CreateForm />);
@@ -50,7 +53,7 @@ describe("Given a component CreateForm", () => {
       expect(button).toBeDisabled();
     });
 
-    describe("When the users enters a playlist name", () => {
+    describe("When the user enters a playlist name", () => {
       test("Then the 'Create' button should be enabled", () => {
         renderRouterWithProviders(<CreateForm />);
         const input = screen.getByLabelText(/Playlist Name:/i);

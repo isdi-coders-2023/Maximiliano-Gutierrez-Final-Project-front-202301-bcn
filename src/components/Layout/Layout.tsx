@@ -21,6 +21,7 @@ const Layout = (): JSX.Element => {
     <>
       <ToastContainer hideProgressBar />
       {isLoading && <Loader />}
+
       <Outlet />
       {isLogged && <BottomNavigation />}
     </>

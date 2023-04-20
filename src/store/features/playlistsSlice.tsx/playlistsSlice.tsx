@@ -3,11 +3,13 @@ import {
   type PlaylistsState,
   type PlaylistsData,
   Playlist,
+  PlaylistUpdateStructure,
 } from "../../../types/playlistsTypes/types";
 
 const playlistState: PlaylistsState = {
   playlists: [],
   selectedPlaylist: {
+    isCreatedByUser: false,
     id: "",
     playlistName: "",
     playlistPhoto: "",
@@ -35,12 +37,36 @@ const playlistsSlice = createSlice({
     deletePlaylist: (
       currentPlaylistState: PlaylistsState,
       action: PayloadAction<string>
-    ): PlaylistsState => ({
+    ) => ({
       ...playlistState,
       playlists: currentPlaylistState.playlists.filter(
         (playlist) => playlist.id !== action.payload
       ),
     }),
+    addPlaylist: (
+      currentPlaylistState: PlaylistsState,
+      action: PayloadAction<Playlist>
+    ): PlaylistsState => ({
+      ...currentPlaylistState,
+      playlists: [...currentPlaylistState.playlists, action.payload],
+    }),
+    editPlaylist: (
+      currentPlaylistState: PlaylistsState,
+      action: PayloadAction<PlaylistUpdateStructure>
+    ): PlaylistsState => {
+      const index = currentPlaylistState.playlists.findIndex(
+        (playlist) => playlist.id === action.payload.id
+      );
+      if (index !== -1) {
+        const updatedPlaylist: Playlist = {
+          ...currentPlaylistState.playlists[index],
+          ...action.payload,
+        };
+        currentPlaylistState.playlists[index] = updatedPlaylist;
+        currentPlaylistState.selectedPlaylist = updatedPlaylist;
+      }
+      return currentPlaylistState;
+    },
   },
 });
 
@@ -50,4 +76,6 @@ export const {
   loadPlaylists: loadPlaylistsActionCreator,
   getPlaylist: getPlaylistActionCreator,
   deletePlaylist: deletePlaylistActionCreator,
+  addPlaylist: addPlaylistActionCreator,
+  editPlaylist: editPlaylistActionCreator,
 } = playlistsSlice.actions;

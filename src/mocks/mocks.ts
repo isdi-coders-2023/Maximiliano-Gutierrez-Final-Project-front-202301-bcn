@@ -1,6 +1,8 @@
 import {
+  Playlist,
   PlaylistsData,
   PlaylistsDataStructure,
+  PlaylistsState,
 } from "../types/playlistsTypes/types";
 import { UiState } from "../types/ui/ui";
 
@@ -100,3 +102,43 @@ export const mockTestDeletePlaylistByIdList: PlaylistsData = [
   mockTestDeletePlaylistById1[0],
   mockTestDeletePlaylistById2[0],
 ];
+
+export const mockPlaylistCreate: Playlist = {
+  playlistName: "Peak Time",
+  playlistPhoto: "Enrico Sangiuliano.jpg",
+  playlistBpm: 0,
+  id: "10",
+  postedBy: "",
+  songs: [
+    {
+      artistName: "Adam Beyer",
+      trackName: "Your Mind",
+      bpmTrack: 129,
+    },
+  ],
+};
+
+export const mockPlaylists: PlaylistsState = {
+  playlists: [mockTestDeletePlaylistById1[0], mockTestDeletePlaylistById2[0]],
+  selectedPlaylist: {
+    playlistName: "Driving",
+    playlistPhoto: "adambeyer.jpg",
+    playlistBpm: 0,
+    id: "10",
+    songs: [
+      {
+        artistName: "Adam Beyer",
+        trackName: "Your Mind",
+        bpmTrack: 129,
+      },
+    ],
+  },
+};
+
+export const usePlaylistMock = {
+  createPlaylist: jest.fn(),
+  deletePlaylistById: jest.fn(),
+  editPlaylistById: jest.fn(),
+  getPlaylistById: jest.fn(),
+  getPlaylists: jest.fn(),
+};
