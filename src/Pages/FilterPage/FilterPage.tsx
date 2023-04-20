@@ -1,7 +1,7 @@
 import PlaylistFilterComponent from "../../components/FilterByBpm/PlaylistsFilterComponent";
 import FilterPageStyled from "./FilterPageStyled";
 
-const CreatePage = (): JSX.Element => {
+const FilterPage = (): JSX.Element => {
   return (
     <FilterPageStyled>
       <h1>
@@ -14,4 +14,4 @@ const CreatePage = (): JSX.Element => {
   );
 };
 
-export default CreatePage;
+export default FilterPage;
