@@ -147,7 +147,11 @@ const CreateForm: React.FC<CreateFormProps> = ({
       onSubmit={handleSubmit}
       className="create-form"
       encType="multipart/form-data"
+      data-testid="create-form"
     >
+      <div data-testid="initial-values" style={{ display: "none" }}>
+        {JSON.stringify(initialValues)}
+      </div>
       <label htmlFor="playlistName" className="create-form__label">
         Playlist Name:
       </label>

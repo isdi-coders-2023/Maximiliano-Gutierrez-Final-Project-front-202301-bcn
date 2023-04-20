@@ -16,7 +16,6 @@ const DetailPage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getPlaylistById(id!);
   }, [getPlaylistById, id]);
 
