@@ -8,6 +8,7 @@ const CreatePage = (): JSX.Element => {
         Create your <br />
         playlist!
       </h1>
+      <p>(All fields are requerid)</p>
       <div className="gradient-style"></div>
       <CreateForm data-testid="create-form" />
     </CreatePageStyled>

@@ -59,7 +59,7 @@ describe("Given a component CreateForm", () => {
         const input = screen.getByLabelText(/Playlist Name:/i);
         const button = screen.getByRole("button", { name: /Create/i });
         fireEvent.change(input, { target: { value: "My Playlist" } });
-        expect(button).toBeEnabled();
+        expect(button).toBeDisabled();
       });
     });
   });
