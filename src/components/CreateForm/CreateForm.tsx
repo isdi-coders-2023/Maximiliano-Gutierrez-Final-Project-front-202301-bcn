@@ -200,6 +200,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
             name="playlistPhoto"
             onChange={handleChangeImage}
             className="create-form__input"
+            required
           />
         </>
       )}
@@ -233,7 +234,9 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
         <ButtonForm
           text={editMode ? "Edit" : "Create"}
-          isDisabled={fieldsEmpty || !allSongsSelected()}
+          isDisabled={
+            fieldsEmpty || !allSongsSelected() || (!editMode && !playlistPhoto)
+          }
           className="create-form__submit-btn"
           ariaLabel="Create playlist"
         />
