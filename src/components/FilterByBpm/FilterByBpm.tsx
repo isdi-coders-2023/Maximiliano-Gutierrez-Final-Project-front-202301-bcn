@@ -26,6 +26,19 @@ const options: FilterOption[] = [
   { label: "129 bpm and more", value: 129 },
 ];
 
+const getUniqueSongs = (songs: Song[]): Song[] => {
+  return songs.filter(
+    (song, index, self) =>
+      index ===
+      self.findIndex(
+        (track) =>
+          track.trackName === song.trackName &&
+          track.artistName === song.artistName &&
+          track.bpmTrack === song.bpmTrack
+      )
+  );
+};
+
 const FilterByBpm: React.FC<FilterByBpmProps> = ({
   playlists,
   onFilteredSongs,
@@ -44,7 +57,9 @@ const FilterByBpm: React.FC<FilterByBpmProps> = ({
       });
     });
 
-    onFilteredSongs(filteredSongs);
+    const uniqueFilteredSongs = getUniqueSongs(filteredSongs);
+
+    onFilteredSongs(uniqueFilteredSongs);
   }, [playlists, selectedFilters, onFilteredSongs]);
 
   const filterSongsRef = useRef(filterSongs);
