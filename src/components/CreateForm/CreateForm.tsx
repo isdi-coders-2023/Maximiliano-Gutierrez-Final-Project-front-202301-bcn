@@ -4,6 +4,7 @@ import { useAppSelector } from "../../store/hooks";
 import {
   type PlaylistUpdateStructure,
   Song,
+  Playlist,
 } from "../../types/playlistsTypes/types";
 import ButtonForm from "../ButtonForm/ButtonForm";
 import CreateFormStyled from "./CreateFormStyled";
@@ -140,6 +141,23 @@ const CreateForm: React.FC<CreateFormProps> = ({
     }
   };
 
+  const getUniqueSongs = (playlists: Playlist[]): Song[] => {
+    const allSongs = playlists.flatMap((playlist) => playlist.songs);
+    const uniqueSongs = allSongs.filter(
+      (song, index, self) =>
+        index ===
+        self.findIndex(
+          (track) =>
+            track.trackName === song.trackName &&
+            track.artistName === song.artistName &&
+            track.bpmTrack === song.bpmTrack
+        )
+    );
+    return uniqueSongs;
+  };
+
+  const uniqueSongs = getUniqueSongs(tracks);
+
   const fieldsEmpty = formState.playlistName === "";
 
   return (
@@ -193,17 +211,15 @@ const CreateForm: React.FC<CreateFormProps> = ({
               className="create-form__song-select"
             >
               <option value="">Select a song</option>
-              {tracks.map((playlist) =>
-                playlist.songs.map((song) => (
-                  <option
-                    className="create-form__section-option"
-                    key={song.trackName}
-                    value={`${song.trackName}-${song.artistName}-${song.bpmTrack}`}
-                  >
-                    {song.trackName} - {song.artistName} - {song.bpmTrack}
-                  </option>
-                ))
-              )}
+              {uniqueSongs.map((song) => (
+                <option
+                  className="create-form__section-option"
+                  key={song.trackName}
+                  value={`${song.trackName}-${song.artistName}-${song.bpmTrack}`}
+                >
+                  {song.trackName} - {song.artistName} - {song.bpmTrack}
+                </option>
+              ))}
             </select>
           </div>
         ))}
