@@ -1,7 +1,16 @@
 import styled from "styled-components";
 
-const ButtonFormStyled = styled.button`
-  background-color: ${(props) => props.theme.colors.mainColorButton};
+interface ButtonFormStyledProps {
+  enabled: boolean;
+}
+
+const ButtonFormStyled = styled.button.attrs<ButtonFormStyledProps>(
+  ({ enabled }) => ({
+    enabled,
+  })
+)<ButtonFormStyledProps>`
+  background-color: ${(props) =>
+    props.enabled ? "green" : props.theme.colors.mainColorButton};
   font-family: ${(props) => props.theme.fonts.secondary};
   height: 3.5rem;
   width: 60%;

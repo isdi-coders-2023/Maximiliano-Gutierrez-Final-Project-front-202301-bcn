@@ -158,6 +158,13 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
   const uniqueSongs = getUniqueSongs(tracks);
 
+  const allSongsSelected = (): boolean => {
+    return formState.songs.every(
+      (song) =>
+        song.trackName !== "" && song.artistName !== "" && song.bpmTrack !== 0
+    );
+  };
+
   const fieldsEmpty = formState.playlistName === "";
 
   return (
@@ -226,7 +233,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
         <ButtonForm
           text={editMode ? "Edit" : "Create"}
-          isDisabled={fieldsEmpty}
+          isDisabled={fieldsEmpty || !allSongsSelected()}
           className="create-form__submit-btn"
           ariaLabel="Create playlist"
         />

@@ -23,6 +23,7 @@ const ButtonForm = ({
       onClick={action}
       className={className}
       aria-label={ariaLabel}
+      enabled={!isDisabled}
     >
       {text}
     </ButtonFormStyled>

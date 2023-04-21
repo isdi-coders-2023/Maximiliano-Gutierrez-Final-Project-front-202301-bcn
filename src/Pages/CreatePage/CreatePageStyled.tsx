@@ -9,7 +9,7 @@ const CreatePagetyled = styled.div`
     rgba(0, 0, 0, 10.65%)
   );
   height: 100%;
-  gap: 40px;
+
   align-items: center;
   padding-top: 40px;
 
@@ -33,6 +33,11 @@ const CreatePagetyled = styled.div`
     mix-blend-mode: lighten;
     opacity: 0.2;
     transform: rotate(-180deg);
+  }
+
+  p {
+    color: #ee9191;
+    margin-bottom: 50px;
   }
 `;
 
