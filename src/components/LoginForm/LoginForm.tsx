@@ -77,7 +77,7 @@ const LoginForm = (): JSX.Element => {
         text={"Log in"}
       />
       <div className="link">
-        Don't have an account? <Link to="/sign-up">Sign up</Link>
+        Don't have an account? <Link to="/register">Sign up</Link>
       </div>
     </LoginFormStyled>
   );

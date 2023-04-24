@@ -10,8 +10,9 @@ const FilterByBpmStyled = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-top: 30px;
+  padding-top: 50px;
   width: 100%;
+  padding-bottom: 200px;
 
   h1 {
     text-align: center;

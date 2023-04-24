@@ -10,6 +10,7 @@ import CreatePage from "../Pages/CreatePage/CreatePage";
 import FilterPage from "../Pages/FilterPage/FilterPage";
 import EditPage from "../Pages/EditPage/EditPage";
 import NotFoundPage from "../Pages/NotFounPage/NotFoundPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 
 const routes: RouteObject[] = [
   {
@@ -17,16 +18,20 @@ const routes: RouteObject[] = [
     element: <App />,
     errorElement: <NotFoundPage />,
     children: [
+      {
+        path: endpoints.register,
+        element: <UnprotectedRoute element={<RegisterPage />} />,
+      },
+      {
+        path: endpoints.login,
+        element: <UnprotectedRoute element={<LoginPage />} />,
+      },
       { index: true, element: <ProtectedRoute element={<HomePage />} /> },
       {
         path: endpoints.details,
         element: <ProtectedRoute element={<DetailPage />} />,
       },
 
-      {
-        path: endpoints.login,
-        element: <UnprotectedRoute element={<LoginPage />} />,
-      },
       {
         path: endpoints.create,
         element: <ProtectedRoute element={<CreatePage />} />,

@@ -40,64 +40,72 @@ const RegisterForm = (): JSX.Element => {
   return (
     <RegisterFormStyled className="register-form" onSubmit={onSubmitHandler}>
       <div className="register-form__section">
-        <label
-          htmlFor="name"
-          className="register-form__title"
-          aria-label="fullname"
-        >
-          Full name
-        </label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Full name"
-          className="register-form__field"
-          autoComplete="off"
-          onChange={handleName}
-        />
+        <div className="container-email">
+          <label
+            htmlFor="name"
+            className="register-form__title"
+            aria-label="fullname"
+          >
+            Full name
+          </label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Full name"
+            className="register-form__field"
+            autoComplete="off"
+            onChange={handleName}
+          />
+        </div>
       </div>
       <div className="register-form__section">
-        <label
-          htmlFor="email"
-          className="register-form__title"
-          aria-label="email"
-        >
-          Email address
-        </label>
-        <input
-          type="email"
-          id="email"
-          placeholder="youremail@aol.com"
-          className="register-form__field"
-          autoComplete="off"
-          onChange={handleEmail}
-        />
+        <div className="container-email">
+          <label
+            htmlFor="email"
+            className="register-form__title"
+            aria-label="email"
+          >
+            Email address
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="youremail@aol.com"
+            className="register-form__field"
+            autoComplete="off"
+            onChange={handleEmail}
+          />
+        </div>
       </div>
-      <div className="register-form__section">
-        <label
-          htmlFor="password"
-          className="register-form__title"
-          aria-label="password"
-        >
-          Password
-        </label>
-        <input
-          aria-label="password-textbox"
-          type="password"
-          id="password"
-          placeholder="Introduce your password"
-          className="register-form__field"
-          autoComplete="off"
-          onChange={handlePassword}
-        />
+
+      <div className="register-form__section section">
+        <div className="container-email">
+          <label
+            htmlFor="password"
+            className="register-form__title"
+            aria-label="password"
+          >
+            Password
+          </label>
+          <input
+            aria-label="password-textbox"
+            type="password"
+            id="password"
+            placeholder="Introduce your password"
+            className="register-form__field"
+            autoComplete="off"
+            onChange={handlePassword}
+          />
+        </div>
       </div>
+
       <ButtonLogin
         className="button-register"
         text={"Create account"}
         isDisabled={areFieldsEmpty}
       />
       <div className="link">
-        Do you have account? <Link to="login/">Log in</Link>
+        Do you have account? <Link to="/login">Log in</Link>
       </div>
     </RegisterFormStyled>
   );

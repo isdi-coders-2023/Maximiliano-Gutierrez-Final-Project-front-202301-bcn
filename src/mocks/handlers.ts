@@ -8,6 +8,8 @@ const routes = {
   delete: "delete/",
   create: "create/",
   id: ":id",
+  detail: "detail/",
+  register: "register/",
 };
 
 export const handlers = [
@@ -19,7 +21,10 @@ export const handlers = [
     `${process.env.REACT_APP_URL_API}${routes.playlists}`,
     (req, res, ctx) => res(ctx.status(200), ctx.json(mockPlaylists))
   ),
-
+  rest.post(
+    `${process.env.REACT_APP_URL_API}${routes.users}${routes.register}`,
+    (req, res, ctx) => res(ctx.status(200))
+  ),
   rest.get(
     `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.users}`,
     (req, res, ctx) => res(ctx.status(200), ctx.json(mockPlaylists))
@@ -41,6 +46,10 @@ export const errorHandlers = [
   ),
   rest.get(
     `${process.env.REACT_APP_URL_API}${routes.playlists}${routes.users}`,
+    (req, res, ctx) => res(ctx.status(400))
+  ),
+  rest.post(
+    `${process.env.REACT_APP_URL_API}${routes.users}${routes.register}`,
     (req, res, ctx) => res(ctx.status(400))
   ),
   rest.delete(
