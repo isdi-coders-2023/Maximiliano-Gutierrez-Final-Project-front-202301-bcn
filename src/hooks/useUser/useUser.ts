@@ -12,11 +12,13 @@ import {
   logoutUserActionCreator,
 } from "../../store/features/userSlice/userSlice";
 import { User } from "../../types/types";
-import { showErrorToast, showSuccessToast } from "../../modals.ts/modals";
+import { showErrorToast } from "../../modals.ts/modals";
 import {
   unsetIsLoadingActionCreator,
   setIsLoadingActionCreator,
+  openModalActionCreator,
 } from "../../store/features/uiSlice.tsx/uiSlice";
+import { useNavigate } from "react-router-dom";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -24,8 +26,13 @@ interface UseUserStructure {
   logoutUser: () => void;
 }
 
+const joinPaths = (...paths: string[]) => {
+  return paths.join("/").replace(/\/+/g, "/");
+};
+
 const useUser = (): UseUserStructure => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { removeToken } = useToken();
 
@@ -38,7 +45,7 @@ const useUser = (): UseUserStructure => {
     try {
       dispatch(setIsLoadingActionCreator());
       const response = await fetch(
-        `${apiUrl}${usersEndpoint}${loginEndpoint}`,
+        joinPaths(apiUrl, usersEndpoint, loginEndpoint),
         {
           method: "POST",
           body: JSON.stringify(userCredentials),
@@ -72,17 +79,39 @@ const useUser = (): UseUserStructure => {
     dispatch(logoutUserActionCreator());
   };
 
-  const registerUser = async (userRegisterData: UserRegisterData) => {
+  const registerUser = async (registerUserData: UserRegisterData) => {
     try {
-      await fetch(`${apiUrl}${usersEndpoint}${registerEndpoint}`, {
-        method: "POST",
-        body: JSON.stringify(userRegisterData),
-        headers: { "Content-Type": "application/json" },
-      });
+      dispatch(setIsLoadingActionCreator());
+      const response = await fetch(
+        joinPaths(apiUrl, usersEndpoint, registerEndpoint),
+        {
+          method: "POST",
+          body: JSON.stringify(registerUserData),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-      showSuccessToast("User registered successfully");
-    } catch {
-      showErrorToast("Invalid credentials");
+      if (!response.ok) {
+        throw new Error("Couldn't create user. Try again!");
+      }
+
+      dispatch(
+        openModalActionCreator({
+          isError: false,
+          message: "The user has been created!",
+          isSuccess: true,
+        })
+      );
+      dispatch(unsetIsLoadingActionCreator());
+      navigate("/login");
+    } catch (error) {
+      dispatch(
+        openModalActionCreator({
+          isError: true,
+          message: "Couldn't create user. Try again!",
+          isSuccess: false,
+        })
+      );
     }
   };
 

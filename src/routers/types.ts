@@ -6,10 +6,12 @@ interface Routes {
   filter: string;
   delete: string;
   edit: string;
+  register: string;
 }
 
 const endpoints: Routes = {
   login: "/login",
+  register: "/register",
   home: "/",
   details: "/details/:id",
   create: "/create",

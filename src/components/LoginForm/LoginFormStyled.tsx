@@ -52,7 +52,7 @@ const LoginFormStyled = styled.form`
   }
 
   .section {
-    margin-bottom: 8.12rem;
+    margin-bottom: 4.12rem;
   }
 
   a {

@@ -26,6 +26,7 @@ export type PlaylistsState = {
   playlists: PlaylistsData;
   selectedPlaylist: Playlist;
   isLoading?: boolean;
+  selectedSongs?: Song[];
 };
 
 export interface PlaylistCreateStructure {

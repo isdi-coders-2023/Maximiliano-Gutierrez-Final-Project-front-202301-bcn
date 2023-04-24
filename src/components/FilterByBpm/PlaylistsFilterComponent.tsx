@@ -1,19 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
 import { useAppSelector } from "../../store/hooks";
 import usePlaylist from "../../hooks/usePlaylist/usePlaylist";
-import { Playlist, Song } from "../../types/playlistsTypes/types";
+import { Song } from "../../types/playlistsTypes/types";
 import FilterByBpm from "./FilterByBpm";
 import PlaylistFilterComponentStyled from "./PlaylistFilterComponentStyled";
-import { v4 as uuidv4 } from "uuid";
 
 interface PlaylistFilterComponentProps {
   handleFilteredSongs?: (songs: Song[]) => void;
 }
 
 const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
-  const { getPlaylist, addPlaylist } = usePlaylist();
+  const { getPlaylist } = usePlaylist();
   const [selectedSongs, setSelectedSongs] = useState<Song[]>([]);
-  const [newPlaylistName, setNewPlaylistName] = useState<string>("");
 
   const fetchPlayilists = useCallback(async () => {
     await getPlaylist();
@@ -41,19 +39,6 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
     });
   };
 
-  const saveNewPlaylist = () => {
-    const newPlaylist: Playlist = {
-      id: uuidv4(),
-      playlistName: newPlaylistName,
-      playlistPhoto: "",
-      playlistBpm: 0,
-      postedBy: "",
-      songs: selectedSongs,
-    };
-
-    addPlaylist(newPlaylist);
-  };
-
   return (
     <PlaylistFilterComponentStyled className="song-filter">
       <FilterByBpm
@@ -61,12 +46,14 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
         onFilteredSongs={handleFilteredSongs}
         className="song-filter__filter-by-bpm"
       />
+
       <section className="song-filter__result-section">
         <h3 className="song-filter__title">Filtered Songs:</h3>
         <ul className="song-filter__list">
           {filteredSongs.map((song, index) => (
             <li
               key={song.id}
+              data-testid="song-filter-list"
               className={`song-filter__list-item ${
                 selectedSongs.includes(song)
                   ? "song-filter__list-item--selected"
@@ -79,23 +66,6 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
             </li>
           ))}
         </ul>
-      </section>
-      <section className="song-filter__new-playlist">
-        <h3>Create new playlist:</h3>
-        <p>(Select from Filtered Songs)</p>
-        <input
-          type="text"
-          placeholder="Playlist name"
-          value={newPlaylistName}
-          onChange={(e) => setNewPlaylistName(e.target.value)}
-          className="song-filter__new-playlist-name"
-        />
-        <button
-          onClick={saveNewPlaylist}
-          className="song-filter__save-playlist"
-        >
-          Save Playlist
-        </button>
       </section>
     </PlaylistFilterComponentStyled>
   );
