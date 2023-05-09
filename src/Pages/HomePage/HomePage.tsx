@@ -8,7 +8,11 @@ const HomePage = (): JSX.Element => {
   const { getPlaylist } = usePlaylist();
 
   useEffect(() => {
-    getPlaylist();
+    getPlaylist()
+      .then(() => {})
+      .catch((error) => {
+        return error;
+      });
   }, [getPlaylist]);
 
   const tracksFromPlaylist = useAppSelector(
