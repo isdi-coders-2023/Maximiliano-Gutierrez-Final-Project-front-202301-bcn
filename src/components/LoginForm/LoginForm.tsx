@@ -29,7 +29,7 @@ const LoginForm = (): JSX.Element => {
     try {
       await loginUser({ email, password });
     } catch (error) {
-      return showErrorToast("Error to login user");
+      showErrorToast("Error to login user");
     }
   };
 

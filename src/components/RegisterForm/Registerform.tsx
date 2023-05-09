@@ -36,7 +36,7 @@ const RegisterForm = (): JSX.Element => {
     try {
       await registerUser({ email, password, name });
     } catch (error) {
-      return showErrorToast("Error to register user");
+      showErrorToast("Error to register user");
     }
   };
 
