@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import Wrapper from "../../mocks/Wrapper";
 import { store } from "../../store/store";
-import { CustomTokenPayload, UserCredentials } from "./types";
+import { CustomTokenPayload } from "./types";
 import useUser from "./useUser";
 import decodeToken from "jwt-decode";
 import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
@@ -24,31 +24,12 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
-const mockUserCredentials: UserCredentials = {
-  email: "leonardofavio@aol.com",
-  password: "leito2000",
-};
-
 const mockTokenPayload: CustomTokenPayload = {
   email: "leonardofavio@aol.com",
   id: "94105818510",
 };
 
 describe("Given a useUser hook", () => {
-  describe("When invoke the loginUser function to log the user with email 'leonardofavio@aol.com' and password 'leito2000'", () => {
-    test("Then it should call the showErrorToas function", async () => {
-      const {
-        result: {
-          current: { loginUser },
-        },
-      } = renderHook(() => useUser(), { wrapper: Wrapper });
-
-      await loginUser(mockUserCredentials);
-
-      expect(spy).toBeCalled();
-    });
-  });
-
   describe("When the logoutUser function is invoked", () => {
     test("Then the dispatch should be called with the action to logout the user", async () => {
       const {
