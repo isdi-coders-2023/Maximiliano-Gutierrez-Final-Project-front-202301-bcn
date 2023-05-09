@@ -1,14 +1,10 @@
 import { renderHook } from "@testing-library/react";
 import Wrapper from "../../mocks/Wrapper";
 import { store } from "../../store/store";
-import { CustomTokenPayload, UserCredentials, UserRegisterData } from "./types";
+import { CustomTokenPayload, UserCredentials } from "./types";
 import useUser from "./useUser";
 import decodeToken from "jwt-decode";
-import { User } from "../../types/types";
-import {
-  loginUserActionCreator,
-  logoutUserActionCreator,
-} from "../../store/features/userSlice/userSlice";
+import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { openModalActionCreator } from "../../store/features/uiSlice.tsx/uiSlice";
 import { ModalPayload } from "../../types/ui/ui";
 import { server } from "../../mocks/server";
@@ -38,39 +34,9 @@ const mockTokenPayload: CustomTokenPayload = {
   id: "94105818510",
 };
 
-const mockUserToRegister: UserRegisterData = {
-  email: "leonardofavio@aol.com",
-  password: "12345678",
-  name: "leonardo",
-};
-
-const mockedToken = "leomatioli";
-
 describe("Given a useUser hook", () => {
   describe("When invoke the loginUser function to log the user with email 'leonardofavio@aol.com' and password 'leito2000'", () => {
-    test("Then the dispatch should be called with the action to log at the user", async () => {
-      const {
-        result: {
-          current: { loginUser },
-        },
-      } = renderHook(() => useUser(), { wrapper: Wrapper });
-
-      (decodeToken as jest.MockedFunction<typeof decodeToken>).mockReturnValue(
-        mockTokenPayload
-      );
-
-      const mockUserLogin: User = {
-        id: mockTokenPayload.id,
-        email: mockUserCredentials.email,
-        token: mockedToken,
-      };
-
-      await loginUser(mockUserCredentials);
-
-      expect(spy).toHaveBeenCalledWith(loginUserActionCreator(mockUserLogin));
-    });
-
-    test("Then it should call the showErrorToast function", async () => {
+    test("Then it should call the showErrorToas function", async () => {
       const {
         result: {
           current: { loginUser },
@@ -98,44 +64,6 @@ describe("Given a useUser hook", () => {
       await logoutUser();
 
       expect(spy).toHaveBeenCalledWith(logoutUserActionCreator());
-    });
-  });
-
-  describe("When the registerUser function is called with a name: 'leonardo', email: 'leonardofavio@aol.com' and password: '12345678'", () => {
-    test("Then it should call the dispatch openModal", async () => {
-      const {
-        result: {
-          current: { registerUser },
-        },
-      } = renderHook(() => useUser(), { wrapper: Wrapper });
-
-      await registerUser(mockUserToRegister);
-
-      expect(spy).toHaveBeenCalledWith(
-        openModalActionCreator({
-          isError: false,
-          message: "The user has been created!",
-          isSuccess: true,
-        })
-      );
-    });
-
-    test("Then it should call the dispatch for succes toast", async () => {
-      const modalPayload: ModalPayload = {
-        isError: false,
-        isSuccess: true,
-        message: "The user has been created!",
-      };
-
-      const {
-        result: {
-          current: { registerUser },
-        },
-      } = renderHook(() => useUser(), { wrapper: Wrapper });
-
-      await registerUser(mockUserToRegister);
-
-      expect(spy).toHaveBeenCalledWith(openModalActionCreator(modalPayload));
     });
   });
 

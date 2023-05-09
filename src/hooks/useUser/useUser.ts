@@ -27,7 +27,7 @@ interface UseUserStructure {
 }
 
 const joinPaths = (...paths: string[]) => {
-  return paths.join("/").replace(/\/+/g, "/");
+  return paths.join("/");
 };
 
 const useUser = (): UseUserStructure => {
@@ -37,9 +37,9 @@ const useUser = (): UseUserStructure => {
   const { removeToken } = useToken();
 
   const apiUrl = process.env.REACT_APP_URL_API!;
-  const usersEndpoint = "users/";
-  const loginEndpoint = "login/";
-  const registerEndpoint = "register/";
+  const usersEndpoint = "users";
+  const loginEndpoint = "login";
+  const registerEndpoint = "register";
 
   const loginUser = async (userCredentials: UserCredentials) => {
     try {

@@ -15,7 +15,7 @@ jobs:
         run: npm ci
 
       - name: 🌐 Set up environment variables
-        run: echo "REACT_APP_URL_API=https://maximiliano-gutierrez-final-project-back.onrender.com/" >> $GITHUB_ENV
+        run: echo "REACT_APP_URL_API=https://maximiliano-gutierrez-final-project-back.onrender.com" >> $GITHUB_ENV
 
       - name: 🧪 Testing
         run: npm test
