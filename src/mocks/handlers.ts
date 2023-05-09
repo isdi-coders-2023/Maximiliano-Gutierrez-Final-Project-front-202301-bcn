@@ -9,7 +9,7 @@ const routes = {
   create: "create/",
   id: ":id",
   detail: "detail/",
-  register: "register/",
+  register: "register",
 };
 
 export const handlers = [
