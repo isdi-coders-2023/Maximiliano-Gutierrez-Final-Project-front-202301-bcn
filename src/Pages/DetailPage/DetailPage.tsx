@@ -19,7 +19,7 @@ const DetailPage = (): JSX.Element => {
     getPlaylistById(id!)
       .then(() => {})
       .catch((error) => {
-        console.error("Error al obtener la lista de reproducción:", error);
+        return error;
       });
   }, [getPlaylistById, id]);
 
