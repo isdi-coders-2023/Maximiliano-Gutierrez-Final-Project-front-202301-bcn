@@ -21,9 +21,9 @@ import {
 } from "../../types/playlistsTypes/types";
 
 const apiUrl = process.env.REACT_APP_URL_API;
-const pathPlaylists = "playlists/";
+const pathPlaylists = "/playlists";
 const getPlaylistEndpoint = "/";
-const deletePlaylistEndpoint = "delete/";
+const deletePlaylistEndpoint = "/delete/";
 const createPlaylistEndpoint = "create/";
 const getUserPlaylistsEndpoint = "users/";
 const editPlaylistEndpoint = "edit/";
@@ -71,7 +71,7 @@ const usePlaylists = () => {
       try {
         dispatch(setIsLoadingActionCreator());
 
-        const response = await fetch(`${apiUrl}${pathPlaylists}${id}`, {
+        const response = await fetch(`${apiUrl}${pathPlaylists}/${id}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -181,7 +181,7 @@ const usePlaylists = () => {
       dispatch(setIsLoadingActionCreator());
 
       const response = await fetch(
-        `${apiUrl}${pathPlaylists}${createPlaylistEndpoint}`,
+        `${apiUrl}${pathPlaylists}/${createPlaylistEndpoint}`,
         {
           method: "POST",
           headers: {
@@ -228,7 +228,7 @@ const usePlaylists = () => {
         dispatch(setIsLoadingActionCreator());
 
         const response = await fetch(
-          `${apiUrl}${pathPlaylists}${editPlaylistEndpoint}${id}`,
+          `${apiUrl}${pathPlaylists}/${editPlaylistEndpoint}${id}`,
           {
             method: "PATCH",
             headers: {

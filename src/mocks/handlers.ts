@@ -4,7 +4,7 @@ import { mockPlaylists } from "./mocks";
 const routes = {
   users: "users/",
   login: "login/",
-  playlists: "playlists/",
+  playlists: "/playlists/",
   delete: "delete/",
   create: "create/",
   id: ":id",
