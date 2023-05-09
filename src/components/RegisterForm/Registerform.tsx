@@ -3,6 +3,7 @@ import { useState } from "react";
 import ButtonLogin from "../ButtonLogin/ButtonLogin";
 import RegisterFormStyled from "./RegisterFormStyled";
 import useUser from "../../hooks/useUser/useUser";
+import { showErrorToast } from "../../modals.ts/modals";
 
 const RegisterForm = (): JSX.Element => {
   const { registerUser } = useUser();
@@ -32,7 +33,11 @@ const RegisterForm = (): JSX.Element => {
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await registerUser({ email, password, name });
+    try {
+      await registerUser({ email, password, name });
+    } catch (error) {
+      return showErrorToast("Error to register user");
+    }
   };
 
   const areFieldsEmpty = email === "" || password === "" || name === "";

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser/useUser";
 import ButtonLogin from "../ButtonLogin/ButtonLogin";
 import LoginFormStyled from "./LoginFormStyled";
+import { showErrorToast } from "../../modals.ts/modals";
 
 const LoginForm = (): JSX.Element => {
   const { loginUser } = useUser();
@@ -28,7 +29,7 @@ const LoginForm = (): JSX.Element => {
     try {
       await loginUser({ email, password });
     } catch (error) {
-      return error;
+      return showErrorToast("Error to login user");
     }
   };
 
