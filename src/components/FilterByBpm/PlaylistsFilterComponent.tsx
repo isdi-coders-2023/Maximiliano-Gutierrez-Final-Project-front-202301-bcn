@@ -18,7 +18,9 @@ const PlaylistFilterComponent: React.FC<PlaylistFilterComponentProps> = () => {
   }, [getPlaylist]);
 
   useEffect(() => {
-    fetchPlayilists();
+    fetchPlayilists().catch((error) => {
+      return error;
+    });
   }, [fetchPlayilists]);
 
   const playlists = useAppSelector((state) => state.playlist.playlists);
