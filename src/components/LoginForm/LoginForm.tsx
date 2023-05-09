@@ -25,7 +25,11 @@ const LoginForm = (): JSX.Element => {
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await loginUser({ email, password });
+    try {
+      await loginUser({ email, password });
+    } catch (error) {
+      return error;
+    }
   };
 
   const fieldsEmpty = email === "" || password === "";
