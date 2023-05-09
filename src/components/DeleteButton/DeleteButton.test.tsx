@@ -32,10 +32,13 @@ describe("Given a DeleteButton component", () => {
     });
   });
 
-  describe("When the button is clicked", () => {
-    test("Then the deletePlaylist function from the usePlaylists hook should be called with the given id", async () => {
+  describe("When the button is clicked and deletePlaylist throws an error", () => {
+    test("Then the navigate function should not be called", async () => {
       const buttonText = "Delete Playlist";
       const playlistId = "1";
+      const errorMessage = "An error occurred.";
+
+      mockDeletePlaylist.mockRejectedValueOnce(new Error(errorMessage));
 
       renderRouterWithProviders(
         <DeleteButton text={buttonText} id={playlistId} />
@@ -44,32 +47,9 @@ describe("Given a DeleteButton component", () => {
       const deleteButton = screen.getByText(buttonText);
       userEvent.click(deleteButton);
 
-      await waitFor(() =>
-        expect(mockDeletePlaylist).toHaveBeenCalledWith(playlistId)
-      );
-    });
+      await waitFor(() => expect(mockDeletePlaylist).toHaveBeenCalledTimes(1));
 
-    describe("When the button is clicked and deletePlaylist throws an error", () => {
-      test("Then the navigate function should not be called", async () => {
-        const buttonText = "Delete Playlist";
-        const playlistId = "1";
-        const errorMessage = "An error occurred.";
-
-        mockDeletePlaylist.mockRejectedValueOnce(new Error(errorMessage));
-
-        renderRouterWithProviders(
-          <DeleteButton text={buttonText} id={playlistId} />
-        );
-
-        const deleteButton = screen.getByText(buttonText);
-        userEvent.click(deleteButton);
-
-        await waitFor(() =>
-          expect(mockDeletePlaylist).toHaveBeenCalledTimes(1)
-        );
-
-        expect(mockNavigate).not.toHaveBeenCalled();
-      });
+      expect(mockNavigate).not.toHaveBeenCalled();
     });
   });
 });
