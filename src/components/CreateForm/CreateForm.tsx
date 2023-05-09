@@ -42,8 +42,8 @@ const CreateForm: React.FC<CreateFormProps> = ({
   const [formState, setFormState] = useState<FormState>(
     editMode && initialValues
       ? {
-          playlistName: initialValues.playlistName || "",
-          songs: initialValues.songs || [],
+          playlistName: initialValues.playlistName ?? "",
+          songs: initialValues.songs ?? [],
         }
       : initialFormtState
   );
@@ -116,7 +116,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
     const data = new FormData();
 
-    data.append("id", initialValues?.id || "");
+    data.append("id", initialValues?.id ?? "");
     data.append("playlistName", formState.playlistName);
     if (playlistPhoto) {
       data.append("playlistPhoto", playlistPhoto);
