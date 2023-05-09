@@ -76,7 +76,11 @@ const CreateForm: React.FC<CreateFormProps> = ({
   }, [getPlaylist]);
 
   useEffect(() => {
-    fetchPlayilists();
+    fetchPlayilists()
+      .then(() => {})
+      .catch((error) => {
+        return error;
+      });
   }, [fetchPlayilists]);
 
   const tracks = useAppSelector((state) => state.playlist.playlists);
@@ -114,31 +118,38 @@ const CreateForm: React.FC<CreateFormProps> = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = new FormData();
+    const submitForm = async () => {
+      const data = new FormData();
 
-    data.append("id", initialValues?.id ?? "");
-    data.append("playlistName", formState.playlistName);
-    if (playlistPhoto) {
-      data.append("playlistPhoto", playlistPhoto);
-    }
-
-    data.append(
-      "userId",
-      decodeToken<CustomTokenPayload>(localStorage.getItem("token")!)?.id
-    );
-
-    const songsJson = JSON.stringify(formState.songs);
-    data.append("songs", songsJson);
-
-    if (editMode) {
-      if (initialValues !== undefined) {
-        const playlistUpdateStructure = formDataToPlaylistUpdateStructure(data);
-        await editPlaylistById(initialValues.id, playlistUpdateStructure);
-        navigate(`/`);
+      data.append("id", initialValues?.id ?? "");
+      data.append("playlistName", formState.playlistName);
+      if (playlistPhoto) {
+        data.append("playlistPhoto", playlistPhoto);
       }
-    } else {
-      await createPlaylist(data);
-    }
+
+      data.append(
+        "userId",
+        decodeToken<CustomTokenPayload>(localStorage.getItem("token")!)?.id
+      );
+
+      const songsJson = JSON.stringify(formState.songs);
+      data.append("songs", songsJson);
+
+      if (editMode) {
+        if (initialValues !== undefined) {
+          const playlistUpdateStructure =
+            formDataToPlaylistUpdateStructure(data);
+          await editPlaylistById(initialValues.id, playlistUpdateStructure);
+          navigate(`/`);
+        }
+      } else {
+        await createPlaylist(data);
+      }
+    };
+
+    submitForm().catch((error) => {
+      return error;
+    });
   };
 
   const getUniqueSongs = (playlists: Playlist[]): Song[] => {
