@@ -16,7 +16,11 @@ const DetailPage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    getPlaylistById(id!);
+    getPlaylistById(id!)
+      .then(() => {})
+      .catch((error) => {
+        console.error("Error al obtener la lista de reproducción:", error);
+      });
   }, [getPlaylistById, id]);
 
   const handleEditClick = () => {
