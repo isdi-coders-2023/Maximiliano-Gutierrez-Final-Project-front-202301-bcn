@@ -11,13 +11,14 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ text, id }) => {
   const { deletePlaylist } = usePlaylists();
   const navigate = useNavigate();
 
-  const handleDelete = async () => {
-    try {
-      await deletePlaylist(id);
-      navigate("/");
-    } catch (error) {
-      return error;
-    }
+  const handleDelete = () => {
+    deletePlaylist(id)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        return error;
+      });
   };
 
   return (
