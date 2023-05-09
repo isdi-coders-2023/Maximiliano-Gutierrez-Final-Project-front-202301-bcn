@@ -115,7 +115,16 @@ const CreateForm: React.FC<CreateFormProps> = ({
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const wrappedHandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleSubmit(event).catch((error) => {
+      return error;
+    });
+  };
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
 
     const submitForm = async () => {
@@ -180,7 +189,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
   return (
     <CreateFormStyled
-      onSubmit={handleSubmit}
+      onSubmit={wrappedHandleSubmit}
       className="create-form"
       encType="multipart/form-data"
       data-testid="create-form"
