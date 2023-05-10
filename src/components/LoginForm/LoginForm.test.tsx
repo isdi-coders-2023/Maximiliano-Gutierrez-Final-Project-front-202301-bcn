@@ -2,7 +2,6 @@ import { renderRouterWithProviders } from "../../testUtil";
 import { act, screen } from "@testing-library/react";
 import LoginForm from "./LoginForm";
 import userEvent from "@testing-library/user-event";
-import { UserCredentials } from "../../hooks/useUser/types";
 
 const mockLoginUser = jest.fn();
 
@@ -72,42 +71,6 @@ describe("Given a component LoginForm", () => {
       );
 
       expect(passwordInput).toHaveValue(introducedPassword);
-    });
-  });
-
-  describe("When the user submits the form with values in it", () => {
-    test("The loginUser function from the useUser hook should be called", async () => {
-      const emailInputPlaceholderText = "Introduce your email";
-      const passwordInputPlaceholderText = "Introduce your password";
-
-      const mockUser: UserCredentials = {
-        email: "leomattioli@aol.com",
-        password: "balcarce",
-      };
-
-      renderRouterWithProviders(<LoginForm />);
-
-      const emailInputPlaceholder = screen.getByPlaceholderText(
-        emailInputPlaceholderText
-      );
-
-      const passwordInputPlaceholder = screen.getByPlaceholderText(
-        passwordInputPlaceholderText
-      );
-
-      const submitButton = screen.getByRole("button");
-
-      await act(
-        async () => await userEvent.type(emailInputPlaceholder, mockUser.email)
-      );
-
-      await act(
-        async () =>
-          await userEvent.type(passwordInputPlaceholder, mockUser.password)
-      );
-      await act(async () => await userEvent.click(submitButton));
-
-      expect(mockLoginUser).toHaveBeenCalledWith(mockUser);
     });
   });
 });

@@ -30,14 +30,14 @@ const RegisterForm = (): JSX.Element => {
     setName(value);
   };
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      await registerUser({ email, password, name });
-    } catch (error) {
-      return showErrorToast("Error to register user");
-    }
+    registerUser({ email, password, name })
+      .then(() => {})
+      .catch((error) => {
+        showErrorToast("Error to register user");
+      });
   };
 
   const areFieldsEmpty = email === "" || password === "" || name === "";

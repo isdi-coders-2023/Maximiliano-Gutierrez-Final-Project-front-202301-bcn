@@ -23,14 +23,14 @@ const LoginForm = (): JSX.Element => {
     setPassword(value);
   };
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      await loginUser({ email, password });
-    } catch (error) {
-      return showErrorToast("Error to login user");
-    }
+    loginUser({ email, password })
+      .then(() => {})
+      .catch((error) => {
+        showErrorToast("Error to register user");
+      });
   };
 
   const fieldsEmpty = email === "" || password === "";
